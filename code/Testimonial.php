@@ -20,6 +20,13 @@ class Testimonial extends DataObject{
 		'Show' => false
 	);
 
+	static $summary_fields = array(
+		'Business',
+		'Name',
+		'Date',
+		'Show'
+	);
+
 	function getCMSFields(){
 		$fields = parent::getCMSFields();
 		$fields->addFieldsToTab("Root.Main", array(
