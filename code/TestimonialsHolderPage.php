@@ -5,15 +5,16 @@ class TestimonialsHolderPage extends Page{
 
 	function getCMSFields(){
 		$fields = parent::getCMSFields();
+		$fields->addFieldToTab("Root.Main", new ComplexTableField($this, "Testimonials", "Testimonial",null,null));
 		return $fields;
 	}
 
 }
 
-class TestimonialsPage_Controller extends Page_Controller{
+class TestimonialsHolderPage_Controller extends Page_Controller{
 
 	function Testimonials(){
-		return DataObject::get('TestimonialPage');
+		return DataObject::get('Testimonial');
 	}
 
 }
