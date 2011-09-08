@@ -43,7 +43,7 @@ class Testimonial extends DataObject{
 	}
 
 	static function get_random($limit = 3){
-		return DataObject::get('Testimonial',"","RAND()","",$limit); //TODO: make random
+		return DataObject::get('Testimonial',"\"Show\" = 1","RAND()","",$limit); //TODO: make random
 	}
 }
 

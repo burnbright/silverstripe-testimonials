@@ -14,7 +14,7 @@ class TestimonialsHolderPage extends Page{
 class TestimonialsHolderPage_Controller extends Page_Controller{
 
 	function Testimonials(){
-		return DataObject::get('Testimonial');
+		return DataObject::get('Testimonial',"\"Show\" = 1");
 	}
 
 }
