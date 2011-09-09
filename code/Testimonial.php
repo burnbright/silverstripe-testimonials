@@ -36,8 +36,7 @@ class Testimonial extends DataObject{
 	}
 
 	function Link(){
-		return null;
-		if($page = DataObject::get_one('Testimonial'))
+		if($page = DataObject::get_one('TestimonialsHolderPage'))
 			return $page->Link().'#testimonial'.$this->ID;
 		return null;
 	}
