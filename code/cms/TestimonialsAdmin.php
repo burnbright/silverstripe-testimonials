@@ -6,5 +6,5 @@ class TestimonialsAdmin extends ModelAdmin{
 	);
 	
 	static $url_segment = 'testimonials';
+	static $menu_priority = 3;
 }
-?>
