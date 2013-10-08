@@ -7,7 +7,6 @@ class TestimonialsHolderPage extends Page{
 	function getCMSFields(){
 		$fields = parent::getCMSFields();
 		$fields->addFieldToTab("Root.Testimonials",
-			//new ComplexTableField($this, "Testimonials", "Testimonial",null,null)
 			GridField::create("Testimonials","Testimonials", Testimonial::get(),
 				GridFieldConfig_RecordEditor::create()
 			)
@@ -19,8 +18,8 @@ class TestimonialsHolderPage extends Page{
 
 class TestimonialsHolderPage_Controller extends Page_Controller{
 
-	function Testimonials(){
-		return DataObject::get('Testimonial',"\"Show\" = 1");
+	function getTestimonials(){
+		return Testimonial::get()->filter("Show",1);
 	}
 
 }
