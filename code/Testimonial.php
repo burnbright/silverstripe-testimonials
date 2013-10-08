@@ -1,10 +1,11 @@
 <?php
+
 class Testimonial extends DataObject{
 
-	static $singular_name = "Testimonial";
-	static $plural_name = "Testimonials";
+	private static $singular_name = "Testimonial";
+	private static $plural_name = "Testimonials";
 
-	static $db = array(
+	private static $db = array(
 		'Content' => 'Text',
 		'Name' => 'Varchar',
 		'Business' => 'Varchar',
@@ -12,30 +13,30 @@ class Testimonial extends DataObject{
 		'Date' => 'Date'
 	);
 
-	static $has_one = array(
+	private static $has_one = array(
 		'Image' => 'Image'
 	);
 
-	static $defaults = array(
+	private static $defaults = array(
 		'Show' => false
 	);
 
-	static $summary_fields = array(
+	private static $summary_fields = array(
 		'Business',
 		'Name',
 		'Date',
 		'Show'
 	);
 
-	function getCMSFields(){
+	public function getCMSFields(){
 		$fields = parent::getCMSFields();
 		$fields->addFieldsToTab("Root.Main", array(
-			new ImageField("Image")
+			UploadField::create("Image")
 		));
 		return $fields;
 	}
 
-	function Link(){
+	public function Link(){
 		if($page = DataObject::get_one('TestimonialsHolderPage'))
 			return $page->Link().'#Testimonial'.$this->ID;
 		return null;
@@ -45,5 +46,3 @@ class Testimonial extends DataObject{
 		return DataObject::get('Testimonial',"\"Show\" = 1","RAND()","",$limit); //TODO: make random
 	}
 }
-
-?>
