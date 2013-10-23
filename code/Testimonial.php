@@ -9,7 +9,6 @@ class Testimonial extends DataObject{
 		'Content' => 'Text',
 		'Name' => 'Varchar',
 		'Business' => 'Varchar',
-		'Show' => 'Boolean',
 		'Date' => 'Date'
 	);
 
@@ -17,16 +16,13 @@ class Testimonial extends DataObject{
 		'Image' => 'Image'
 	);
 
-	private static $defaults = array(
-		'Show' => false
-	);
-
 	private static $summary_fields = array(
 		'Business',
 		'Name',
-		'Date',
-		'Show'
+		'Date'
 	);
+
+	private static $default_sort = "Date DESC";
 
 	public function getCMSFields(){
 		$fields = parent::getCMSFields();
@@ -43,7 +39,7 @@ class Testimonial extends DataObject{
 	}
 
 	static function get_random($limit = 3){
-		return Testimonial::get()->filter("Show",1)->sort("RAND()")->limit($limit);
+		return Testimonial::get()->sort("RAND()")->limit($limit);
 	}
 	
 }

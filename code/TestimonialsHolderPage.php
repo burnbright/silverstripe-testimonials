@@ -2,8 +2,6 @@
 
 class TestimonialsHolderPage extends Page{
 
-	static $db = array();
-
 	function getCMSFields(){
 		$fields = parent::getCMSFields();
 		$fields->addFieldToTab("Root.Testimonials",
