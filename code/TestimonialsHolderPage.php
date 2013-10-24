@@ -17,7 +17,7 @@ class TestimonialsHolderPage extends Page{
 class TestimonialsHolderPage_Controller extends Page_Controller{
 
 	function getTestimonials(){
-		return Testimonial::get()->filter("Show",1);
+		return Testimonial::get();
 	}
 
 }
