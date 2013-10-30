@@ -10,9 +10,13 @@ class TestimonialWidget extends Widget {
 		'Page' => 'TestimonialsHolderPage'
 	);
 
+	protected $testimonial;
+
 	function getTestimonial(){
-		$testimonials = Testimonial::get()->sort("RAND()");
-		return $testimonials->first();
+		if(!$this->testimonial){
+			$this->testimonial = Testimonial::get()->sort("RAND()")->first();
+		}
+		return $this->testimonial;
 	}
 
 	function getCMSFields(){
