@@ -38,8 +38,24 @@ class Testimonial extends DataObject{
 		return null;
 	}
 
-	static function get_random($limit = 3){
+	public static function get_random($limit = 3){
 		return Testimonial::get()->sort("RAND()")->limit($limit);
+	}
+
+	public function canCreate($member = null) {
+		return Permission::check("CMS_ACCESS_CMSMain");
+	}
+
+	public function canEdit($member = null) {
+		return Permission::check("CMS_ACCESS_CMSMain");
+	}
+
+	public function canDelete($member = null) {
+		return Permission::check("CMS_ACCESS_CMSMain");
+	}
+
+	public function canView($member = null) {
+		return Permission::check("CMS_ACCESS_CMSMain");
 	}
 	
 }

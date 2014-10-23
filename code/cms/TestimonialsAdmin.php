@@ -1,10 +1,12 @@
 <?php
+
 class TestimonialsAdmin extends ModelAdmin{
-	
-	public static $managed_models = array(
+
+	private static $url_segment = 'testimonials';
+	private static $menu_icon = 'testimonials/images/testimonials-icon.png';
+
+	private static $managed_models = array(
 		'Testimonial'
 	);
 	
-	static $url_segment = 'testimonials';
-	static $menu_priority = 3;
 }
