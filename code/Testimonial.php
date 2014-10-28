@@ -9,11 +9,13 @@ class Testimonial extends DataObject{
 		'Content' => 'Text',
 		'Name' => 'Varchar',
 		'Business' => 'Varchar',
-		'Date' => 'Date'
+		'Date' => 'Date',
+		'Hidden' => 'Boolean'
 	);
 
 	private static $has_one = array(
-		'Image' => 'Image'
+		'Image' => 'Image',
+		'Member' => 'Member'
 	);
 
 	private static $summary_fields = array(
@@ -24,21 +26,63 @@ class Testimonial extends DataObject{
 
 	private static $default_sort = "Date DESC";
 
-	public function getCMSFields(){
+	public function getCMSFields() {
 		$fields = parent::getCMSFields();
-		$fields->addFieldsToTab("Root.Main", array(
-			UploadField::create("Image")
-		));
+		$fields->addFieldToTab("Root.Main",
+			new DropdownField("MemberID","Member",
+				Member::get()->map("ID","Name")->toArray()
+			)
+		);
+		if($this->Member()){
+			$fields->removeByName("Name");
+		}
 		return $fields;
 	}
 
-	public function Link(){
-		if($page = DataObject::get_one('TestimonialsHolderPage'))
-			return $page->Link().'#Testimonial'.$this->ID;
-		return null;
+	public function getFrontEndFields($params = null) {
+		$fields = $this->scaffoldFormFields($params);
+		$fields->removeByName('Date');
+		$fields->removeByName('Hidden');
+		if(!$this->isInDB()){
+			$fields->removeByName('Image');
+		}
+		if(isset($params['Testimonial']) && $params['Testimonial']->MemberID){
+			$fields->removeByName("Name");
+		}
+		$fields->removeByName("MemberID");
+		$this->extend('updateFrontEndFields', $fields);
+
+		return $fields;
 	}
 
-	public static function get_random($limit = 3){
+	public function Link() {
+		if($page = TestimonialsHolderPage::get()->first()){
+			return $page->Link().'#Testimonial'.$this->ID;
+		}
+	}
+
+	public function Image(){
+		if($member = $this->Member()){
+			return $member->Image();
+		}
+		return $this->getCompoent("Image");
+	}
+
+	public function Name(){
+		if($member = $this->Member()){
+			return $member->Name;
+		}
+		return $this->getField("Name");
+	}
+
+	public function onBeforeWrite() {
+		parent::onBeforeWrite();
+		if(!$this->Date) {
+			$this->Date = date('Y-m-d H:i:s');
+		}
+	}
+
+	public static function get_random($limit = 3) {
 		return Testimonial::get()->sort("RAND()")->limit($limit);
 	}
 
