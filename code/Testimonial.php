@@ -87,19 +87,19 @@ class Testimonial extends DataObject{
 	}
 
 	public function canCreate($member = null) {
-		return Permission::check("CMS_ACCESS_CMSMain");
+		return (boolean)$member;
 	}
 
 	public function canEdit($member = null) {
-		return Permission::check("CMS_ACCESS_CMSMain");
+		return Permission::check("CMS_ACCESS_CMSMain") || ($member && $this->MemberID == $member->ID);
 	}
 
 	public function canDelete($member = null) {
-		return Permission::check("CMS_ACCESS_CMSMain");
+		return Permission::check("CMS_ACCESS_CMSMain") || ($member && $this->MemberID == $member->ID);
 	}
 
 	public function canView($member = null) {
-		return Permission::check("CMS_ACCESS_CMSMain");
+		return true;
 	}
 	
 }
