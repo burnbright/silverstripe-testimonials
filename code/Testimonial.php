@@ -62,10 +62,11 @@ class Testimonial extends DataObject{
 	}
 
 	public function Image(){
-		if($member = $this->Member()){
+		$member = $this->Member();
+		if($member->exists()){
 			return $member->Image();
 		}
-		return $this->getCompoent("Image");
+		return $this->getComponent("Image");
 	}
 
 	public function Name(){
