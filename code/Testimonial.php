@@ -88,14 +88,20 @@ class Testimonial extends DataObject{
 	}
 
 	public function canCreate($member = null) {
+        if(!$member) $member = Member::currentUser();
+        
 		return (boolean)$member;
 	}
 
 	public function canEdit($member = null) {
+        if(!$member) $member = Member::currentUser();
+        
 		return Permission::check("CMS_ACCESS_CMSMain") || ($member && $this->MemberID == $member->ID);
 	}
 
 	public function canDelete($member = null) {
+        if(!$member) $member = Member::currentUser();
+        
 		return Permission::check("CMS_ACCESS_CMSMain") || ($member && $this->MemberID == $member->ID);
 	}
 
