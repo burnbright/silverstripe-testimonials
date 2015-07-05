@@ -33,9 +33,7 @@ class Testimonial extends DataObject{
 				Member::get()->map("ID","Name")->toArray()
 			)
 		);
-		if($this->Member()){
-			$fields->removeByName("Name");
-		}
+
 		return $fields;
 	}
 
