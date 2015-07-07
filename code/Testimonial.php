@@ -29,9 +29,9 @@ class Testimonial extends DataObject{
 	public function getCMSFields() {
 		$fields = parent::getCMSFields();
 		$fields->addFieldToTab("Root.Main",
-			new DropdownField("MemberID","Member",
+			DropdownField::create("MemberID","Member",
 				Member::get()->map("ID","Name")->toArray()
-			)
+			)->setHasEmptyDefault(true)
 		);
 
 		return $fields;
@@ -68,8 +68,8 @@ class Testimonial extends DataObject{
 	}
 
 	public function Name(){
-		if($member = $this->Member()){
-			return $member->Name;
+		if($this->Member()->exists()){
+			return $this->Member()->Name;
 		}
 		return $this->getField("Name");
 	}
