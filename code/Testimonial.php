@@ -86,7 +86,7 @@ class Testimonial extends DataObject{
 	}
 
 	public function canCreate($member = null) {
-		return (boolean)$member;
+		return (boolean)Member::currentUserID();
 	}
 
 	public function canEdit($member = null) {
