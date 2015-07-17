@@ -19,5 +19,14 @@ class TestimonialsHolderPage_Controller extends Page_Controller{
 	function getTestimonials(){
 		return Testimonial::get();
 	}
-
+    
+    function PaginatedTestimonials($page_length = 10) {
+        $list = PaginatedList::create(
+            $this->getTestimonials(),
+            $this->request
+        );
+        $list->setPageLength($page_length);
+        
+        return $list;
+    }
 }
