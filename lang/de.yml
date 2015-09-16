@@ -1,0 +1,21 @@
+de:
+  TestimonialsAdmin:
+    MENUTITLE: Testimonials
+  Testimonial:
+    PLURALNAME: Testimonials
+    SINGULARNAME: Testimonial
+    db_Business: Firma
+    db_Content: Inhalt
+    db_Date: Datum
+    db_Hidden: Versteckt
+    db_Name: Name
+    db_Position: Position
+    db_URL: URL
+    has_one_Image: Bild
+    has_one_Member: Member
+  TestimonialWidget:
+    READMORE: 'mehr...'
+  TestimonialsHolderPage:
+    DESCRIPTION: 'Seite für Testimonials'
+    PLURALNAME: 'Testimonial Holder'
+    SINGULARNAME: 'Testimonial Holder'

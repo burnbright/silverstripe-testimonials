@@ -2,5 +2,5 @@
 	<% include Testimonial %>
 <% end_with %>
 <% if Page %>
-	<a href="$Page.Link">read more...</a>
+	<a href="$Page.Link"><%t TestimonialWidget.READMORE 'read more...' %></a>
 <% end_if %>
